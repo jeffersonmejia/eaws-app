@@ -1,0 +1,48 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: eaws-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-eaws}
+      MYSQL_USER: ${MYSQL_USER:-eaws}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "127.0.0.1:3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./app/database/init:/docker-entrypoint-initdb.d
+    networks:
+      - eaws-net
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    security_opt:
+      - no-new-privileges:true
+    deploy:
+      resources:
+        limits:
+          cpus: "1.5"
+          memory: 1024M
+        reservations:
+          cpus: "0.5"
+          memory: 512M
+    command: >
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+      --innodb_buffer_pool_size=512M
+      --max_connections=50
+      --skip-name-resolve
+      --log-error=/var/lib/mysql/error.log
+
+volumes:
+  mysql_data:
+    name: eaws_mysql_data
+
+networks:
+  eaws-net:
+    name: eaws_network
