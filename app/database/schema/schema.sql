@@ -1,3 +1,6 @@
+SET NAMES utf8mb4;
+SET CHARACTER SET utf8mb4;
+
 CREATE TABLE IF NOT EXISTS careers (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
@@ -129,4 +132,10 @@ CREATE TABLE IF NOT EXISTS exam_tips (
   tip TEXT NOT NULL,
   source ENUM('professor', 'ai', 'personal') NOT NULL,
   FOREIGN KEY (assessment_id) REFERENCES assessments(id)
+);
+
+CREATE TABLE IF NOT EXISTS app_config (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  config_key VARCHAR(100) NOT NULL UNIQUE,
+  config_value TEXT NOT NULL
 );

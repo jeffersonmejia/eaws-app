@@ -1,3 +1,4 @@
+SET NAMES utf8mb4;
 -- DESARROLLO WEB PARA INTEGRACIÓN DE TECNOLOGÍAS - Geovanny Brito
 
 INSERT INTO grading_criteria (professor_subject_id, description, breakdown)

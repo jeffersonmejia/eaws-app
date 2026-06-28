@@ -1,3 +1,4 @@
+SET NAMES utf8mb4;
 -- PROGRAMACIÓN INTEGRATIVA DE COMPONENTES WEB - Kevin Chuquitarco
 
 INSERT INTO grading_criteria (professor_subject_id, description, breakdown)

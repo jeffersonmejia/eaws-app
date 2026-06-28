@@ -1,3 +1,4 @@
+SET NAMES utf8mb4;
 -- TEXTOS ACADÉMICOS - Daniel Nuñez
 
 INSERT INTO grading_criteria (professor_subject_id, description, breakdown)

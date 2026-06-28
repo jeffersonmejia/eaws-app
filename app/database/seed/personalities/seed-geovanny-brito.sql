@@ -1,3 +1,4 @@
+SET NAMES utf8mb4;
 -- Personalidad: Geovanny Brito (Desarrollo Web para Integración de Tecnologías)
 
 INSERT INTO professor_personalities (professor_id, aspect, detail)

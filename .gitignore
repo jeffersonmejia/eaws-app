@@ -1,16 +1,13 @@
 # Project specific
-database/init/
+app/database/init/
 .env
+app/.env
 
-# Python
-__pycache__/
-*.py[cod]
-*.egg-info/
-dist/
-build/
-.venv/
-venv/
-*.egg
+# Node
+node_modules/
+app/node_modules/
+app/interfaces/presentation/node_modules/
+app/interfaces/presentation/src/output.css
 
 # IDE
 .vscode/

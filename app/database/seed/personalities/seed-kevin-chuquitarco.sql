@@ -1,3 +1,4 @@
+SET NAMES utf8mb4;
 -- Personalidad: Kevin Chuquitarco (Programación Integrativa de Componentes Web)
 
 INSERT INTO professor_personalities (professor_id, aspect, detail)

@@ -1,3 +1,4 @@
+SET NAMES utf8mb4;
 -- Personalidad: Daniel Nuñez (Textos Académicos)
 
 INSERT INTO professor_personalities (professor_id, aspect, detail)

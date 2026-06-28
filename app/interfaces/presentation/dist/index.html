@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EAWS</title>
+  <style>
+    :root {
+      --green: #30a46c;
+      --green-bright: #57c785;
+      --text: #1d2f24;
+      --text-muted: #6b7f70;
+      --page: #dcefe8;
+      --surface: rgba(255,255,255,0.25);
+      --surface-strong: rgba(255,255,255,0.45);
+      --glass-sheen: linear-gradient(145deg, #ffffff85 0%, #ffffff24 38%, #30a46c14 100%);
+      --border: rgba(255,255,255,0.6);
+    }
+    [data-theme="dark"] {
+      --green: #6ee7a3;
+      --green-bright: #8df5ba;
+      --text: #e8f7ee;
+      --text-muted: #a8c4b2;
+      --page: #07130d;
+      --surface: rgba(255,255,255,0.06);
+      --surface-strong: rgba(255,255,255,0.10);
+      --glass-sheen: linear-gradient(145deg, #ffffff1f 0%, #ffffff0b 38%, #6ee7a31f 100%);
+      --border: rgba(216,255,224,0.12);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui,-apple-system,sans-serif; background: var(--page); color: var(--text); transition: background 0.25s, color 0.25s; }
+    .glass-strong {
+      background: var(--glass-sheen), var(--surface-strong);
+      background-blend-mode: screen, normal;
+      backdrop-filter: blur(30px) saturate(200%) contrast(1.04);
+      -webkit-backdrop-filter: blur(30px) saturate(200%) contrast(1.04);
+      border: 1px solid var(--border);
+    }
+    .glass-btn {
+      background: transparent;
+      transition: background 0.15s, transform 0.15s;
+    }
+    .glass-btn:hover { background: var(--surface-strong); }
+    .glass-btn:active { transform: scale(0.97); }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 999px; }
+  </style>
+  <script type="module" crossorigin src="/assets/index-4XJquQy1.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+</body>
+</html>

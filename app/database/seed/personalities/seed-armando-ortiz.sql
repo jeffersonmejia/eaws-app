@@ -1,3 +1,4 @@
+SET NAMES utf8mb4;
 -- Personalidad: Armando Ortiz (Modelado Avanzado de Base de Datos)
 
 INSERT INTO professor_personalities (professor_id, aspect, detail)

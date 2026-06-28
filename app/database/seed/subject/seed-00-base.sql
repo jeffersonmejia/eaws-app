@@ -1,3 +1,4 @@
+SET NAMES utf8mb4;
 INSERT INTO semesters (name, start_date, end_date)
 VALUES ('2026-1', '2026-03-01', '2026-08-31');
 
