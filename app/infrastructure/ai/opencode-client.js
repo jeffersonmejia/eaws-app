@@ -2,10 +2,15 @@ import { env } from '../../config/env.js';
 
 export class OpencodeClient {
   async generate({ professors, query, summary }) {
-    const personality = professors
-      .map(p =>
-        `--- ${p.professor} ---\n` +
-        p.aspects.map(a => `${a.aspect}: ${a.detail}`).join('\n')
+    const grouped = {};
+    for (const row of professors) {
+      if (!grouped[row.professor]) grouped[row.professor] = [];
+      grouped[row.professor].push(row);
+    }
+    const personality = Object.entries(grouped)
+      .map(([name, rows]) =>
+        `--- ${name} ---\n` +
+        rows.map(r => `${r.aspect}: ${r.detail}`).join('\n')
       ).join('\n\n');
 
     const system = [
