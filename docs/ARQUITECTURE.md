@@ -1,14 +1,13 @@
 # EAWS — Engineering Academic Workspace
 
-**Autor:** Jefferson Mejía  
-**Documento:** PROJECT_BLUEPRINT.md  
-**Versión del documento:** v0.1.0  
-**Versión del proyecto:** v1.0.0  
-**Estado:** Planeación y Arquitectura  
-**Fecha de inicio del proyecto:** 28 de junio de 2026  
-**Última actualización:** 28 de junio de 2026  
-**Metodología de desarrollo de software:** Scrum adaptado a desarrollador único  
-**Licencia:** Apache License 2.0
+**Autor:** Jefferson Mejía
+**Documento:** PROJECT_BLUEPRINT.md
+**Versión del documento:** v0.1.0
+**Versión del proyecto:** v1.0.0
+**Estado:** Planeación y Arquitectura
+**Metodología de desarrollo de software:** Scrum adaptado a desarrollador único
+**Licencia:** Pendiente de definición
+**Última actualización:** 28 de junio de 2026
 
 ---
 
