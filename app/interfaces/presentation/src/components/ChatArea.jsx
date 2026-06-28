@@ -152,7 +152,7 @@ export default function ChatArea({ context }) {
 
   const headerText = context
     ? `${context.subject.name} · ${labels[context.type]}`
-    : 'Selecciona una materia y actividad';
+    : 'Selecciona tipo y materia';
 
   return (
     <main style={s.container}>
@@ -160,8 +160,8 @@ export default function ChatArea({ context }) {
       <div style={s.messages}>
         {!context && (
           <div style={{ textAlign: 'center', padding: '3rem 0', color: 'var(--text-muted)' }}>
-            <p style={{ fontSize: '1rem', fontWeight: 300 }}>Selecciona una materia</p>
-            <p style={{ fontSize: '0.8rem', opacity: 0.6, marginTop: '0.3rem' }}>Elige del menú lateral</p>
+            <p style={{ fontSize: '1rem', fontWeight: 300 }}>Selecciona el tipo</p>
+            <p style={{ fontSize: '0.8rem', opacity: 0.72, marginTop: '0.3rem' }}>Luego elige la materia</p>
           </div>
         )}
         {messages.map((m, i) => <Message key={i} {...m} />)}
@@ -172,7 +172,7 @@ export default function ChatArea({ context }) {
         <div style={s.inputWrap}>
           <input
             style={s.input}
-            placeholder={context ? "Escribe tu mensaje..." : "Selecciona una materia primero"}
+            placeholder={context ? "Escribe tu mensaje..." : "Selecciona tipo y materia primero"}
             value={input}
             onChange={e => setInput(e.target.value)}
             onKeyDown={e => e.key === 'Enter' && handleSend()}

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import {
-  ChevronRight, BookOpen, GraduationCap, TrendingUp,
-  FlaskConical, FileText, MessageCircle,
+  BookOpen, GraduationCap, TrendingUp,
+  MessageCircle,
   Sun, Moon, PanelRightClose, PanelRightOpen,
 } from 'lucide-react';
 
@@ -21,7 +21,7 @@ const row = {
   fontSize: '0.78rem',
   borderRadius: '0.7rem',
   cursor: 'pointer',
-  border: 'none',
+  border: '1px solid transparent',
   color: 'var(--text)',
   width: '100%',
   textAlign: 'left',
@@ -32,9 +32,9 @@ const row = {
 const icon = { width: '15px', height: '15px', flexShrink: 0, color: 'var(--green)' };
 
 const types = [
-  { key: 'lab', label: 'Laboratorio', icon: FlaskConical },
-  { key: 'tarea', label: 'Tarea', icon: FileText },
-  { key: 'consulta', label: 'Consulta Libre', icon: MessageCircle },
+  { key: 'lab', label: 'Laboratorio' },
+  { key: 'tarea', label: 'Tarea' },
+  { key: 'consulta', label: 'Consulta Libre' },
 ];
 
 function SectionLabel({ icon: Icon, label }) {
@@ -47,7 +47,7 @@ function SectionLabel({ icon: Icon, label }) {
 }
 
 export default function Sidebar({ student, average, open, dark, onToggleTheme, onToggleSidebar, onSelect }) {
-  const [openSubject, setOpenSubject] = useState(null);
+  const [selectedType, setSelectedType] = useState(null);
 
   /* --- collapsed --- */
   if (!open) {
@@ -116,36 +116,45 @@ export default function Sidebar({ student, average, open, dark, onToggleTheme, o
         )}
       </div>
 
-      {/* subjects */}
-      <SectionLabel icon={BookOpen} label="Materias" />
+      <SectionLabel icon={MessageCircle} label="Tipo" />
 
-      {(student?.subjects || []).map(subj => {
-        const isOpen = openSubject === subj.code;
-        return (
-          <div key={subj.code} style={{ borderRadius: '0.7rem', overflow: 'hidden' }}>
-            <button style={row} className="glass-btn" onClick={() => setOpenSubject(isOpen ? null : subj.code)}>
-              <ChevronRight size={13} style={{ ...icon, transition: 'transform 0.2s', transform: isOpen ? 'rotate(90deg)' : 'none' }} />
-              <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flex: 1 }}>{subj.name}</span>
-            </button>
-            <div style={{ overflow: 'hidden', maxHeight: isOpen ? '150px' : '0', transition: 'max-height 0.25s ease', display: 'flex', flexDirection: 'column', gap: '1px' }}>
-              {types.map(t => {
-                const Icon = t.icon;
-                return (
-                  <button key={t.key}
-                    style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', width: '100%', textAlign: 'left', padding: '0.28rem 0.5rem 0.28rem 1.6rem', fontSize: '0.7rem', borderRadius: '0.6rem', border: 'none', cursor: 'pointer', color: 'var(--text-muted)', background: 'transparent', transition: 'background 0.15s, color 0.15s' }}
-                    onMouseEnter={e => { e.currentTarget.style.background = 'var(--surface)'; e.currentTarget.style.color = 'var(--text)'; }}
-                    onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--text-muted)'; }}
-                    onClick={() => onSelect(subj, t.key)}
-                  >
-                    <Icon size={13} style={{ color: 'var(--green)' }} />
-                    {t.label}
-                  </button>
-                );
-              })}
-            </div>
+      <select
+        value={selectedType || ''}
+        onChange={e => setSelectedType(e.target.value || null)}
+        style={{
+          width: '100%',
+          borderRadius: '0.7rem',
+          border: '1px solid var(--border-strong)',
+          padding: '0.45rem 0.55rem',
+          fontSize: '0.78rem',
+          color: selectedType ? 'var(--text)' : 'var(--text-muted)',
+          background: 'var(--surface-strong)',
+          outline: 'none',
+          cursor: 'pointer',
+        }}
+      >
+        <option value="">Elige tipo...</option>
+        {types.map(t => <option key={t.key} value={t.key}>{t.label}</option>)}
+      </select>
+
+      {selectedType && (
+        <>
+          <SectionLabel icon={BookOpen} label="Materias" />
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.15rem' }}>
+            {(student?.subjects || []).map(subj => (
+              <button key={subj.code}
+                style={row}
+                className="glass-btn"
+                onClick={() => onSelect(subj, selectedType)}
+              >
+                <BookOpen size={13} style={icon} />
+                <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flex: 1 }}>{subj.name}</span>
+              </button>
+            ))}
           </div>
-        );
-      })}
+        </>
+      )}
 
       {/* theme */}
       <div style={{ marginTop: 'auto', paddingTop: '0.3rem', borderTop: '1px solid var(--border)', display: 'flex', justifyContent: 'center' }}>

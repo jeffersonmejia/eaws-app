@@ -3,7 +3,7 @@ import { getPool } from '../../infrastructure/database/connection.js';
 export class GetAverageUseCase {
   async execute() {
     const [rows] = await getPool().query(`
-      latest AS (
+      WITH last_unit AS (
         SELECT ps.subject_id AS sid, MAX(u.order_index) AS max_ord
         FROM units u
         JOIN professor_subjects ps ON u.subject_id = ps.subject_id
@@ -13,7 +13,7 @@ export class GetAverageUseCase {
       ),
       unit_assessments AS (
         SELECT l.sid, l.max_ord, a.id, a.weight, g.score
-        FROM latest l
+        FROM last_unit l
         JOIN professor_subjects ps ON ps.subject_id = l.sid
         JOIN assessments a ON a.professor_subject_id = ps.id
         JOIN units u ON a.unit_id = u.id
@@ -37,6 +37,6 @@ export class GetAverageUseCase {
     const general = subjects.length
       ? Math.round(subjects.reduce((s, x) => s + x.avg, 0) / subjects.length * 100) / 100
       : 0;
-    return { general, subjects, partial: short };
+    return { general, subjects, partial };
   }
 }

@@ -1,4 +1,10 @@
-import 'dotenv/config';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { config } from 'dotenv';
+
+const currentDir = path.dirname(fileURLToPath(import.meta.url));
+
+config({ path: path.resolve(currentDir, '../.env') });
 
 export const env = {
   port: Number(process.env.PORT) || 4000,
@@ -10,6 +16,7 @@ export const env = {
     name: process.env.DB_NAME || 'eaws',
   },
   opencode: {
-    url: process.env.OPencode_SERVER_URL || 'http://127.0.0.1:4096',
+    url: process.env.OPENCODE_SERVER_URL || process.env.OPencode_SERVER_URL || 'http://127.0.0.1:4096',
+    token: process.env.OPENCODE_AUTH_TOKEN || '',
   },
 };

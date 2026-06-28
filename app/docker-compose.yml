@@ -5,14 +5,14 @@ services:
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE:-eaws}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-eaws_db}
       MYSQL_USER: ${MYSQL_USER:-eaws}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
       - "127.0.0.1:3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
-      - ./app/database/init:/docker-entrypoint-initdb.d
+      - ./database/init:/docker-entrypoint-initdb.d
     networks:
       - eaws-net
     healthcheck:

@@ -1,5 +1,10 @@
 import { env } from '../../config/env.js';
 
+const createHeaders = () => ({
+  'Content-Type': 'application/json',
+  ...(env.opencode.token ? { Authorization: `Bearer ${env.opencode.token}` } : {}),
+});
+
 export class OpencodeClient {
   async generate({ professors, query, summary }) {
     const grouped = {};
@@ -27,14 +32,14 @@ export class OpencodeClient {
 
     const sessionRes = await fetch(`${env.opencode.url}/session`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: createHeaders(),
       body: JSON.stringify({ title: `EAWS: study` }),
     });
     const session = await sessionRes.json();
 
     const msgRes = await fetch(`${env.opencode.url}/session/${session.id}/message`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: createHeaders(),
       body: JSON.stringify({
         parts: [
           { type: 'text', text: system },
@@ -44,7 +49,10 @@ export class OpencodeClient {
     });
     const msg = await msgRes.json();
 
-    await fetch(`${env.opencode.url}/session/${session.id}`, { method: 'DELETE' });
+    await fetch(`${env.opencode.url}/session/${session.id}`, {
+      method: 'DELETE',
+      headers: createHeaders(),
+    });
 
     return msg.parts?.find(p => p.type === 'text')?.text || '';
   }
